@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       const arr = []
+       for(let i = 1; i <= 100; i++) {
+        arr.push(i)
+       }
+       console.log(arr) // [1-100]
+       let result = arr.reduce((acc,item,index,arr) => {
+        // acc累加器  item每一项的值  index索引号 arr原数组
+            return acc + item
+        },0)
+        // 这个0是初始值 从0开始加
+        console.log(result) // 5050
+
+
+        let url = 'http://www.baidu.com/?name=zhangsan&age=18&sex=nan'
+        const process = url => {
+            // split() 方法用于把一个字符串分割成字符串数组
+            // 语法 : stringObject.split(separator,howmany)
+            // separator 必需。字符串或正则表达式，从该参数指定的地方分割 stringObject。
+            // howmany 可选。该参数可指定返回的数组的最大长度
+            let [,arr1] = url.split('?')
+            // console.log(arr1); // name=zhangsan&age=18&sex=nan
+            let arr2 = arr1.split('&')
+            // console.log(arr2) // ['name=zhangsan', 'age=18', 'sex=nan']
+            return arr2.reduce((acc,item) => {
+                // console.log(acc); // {}
+                // console.log(item); // zhangsan 18 nan
+                if(item.includes('=')) {
+                    let [key,value] = item.split('=')
+                    // console.log(value) // zhangsan 18 nan
+                    // console.log(key) //name age sex                           
+                   acc[key] = value
+                }  
+                return acc
+            },{})
+        }
+        console.log(process(url));
+
+
+        
+
+    </script>
+</body>
+</html>
